@@ -1,297 +1,436 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RFP Copilot | Ausschreibungen schneller gewinnen</title>
-  <meta name="description" content="RFP Copilot hilft DACH-Mittelständlern, Ausschreibungen schneller, konsistenter und mit weniger Aufwand zu beantworten." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #070b14;
-      --bg-elev: #0f172a;
-      --surface: #111c35;
-      --surface-2: #0e162a;
-      --text: #eef4ff;
-      --muted: #99a7c8;
-      --line: #223252;
-      --primary: #4f7cff;
-      --primary-2: #6f59ff;
-      --success: #2cc59f;
-      --shadow: 0 20px 60px rgba(3, 8, 24, 0.55);
-      --radius: 16px;
-    }
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(900px 420px at 85% -10%, rgba(79, 124, 255, 0.28), transparent 60%),
-        radial-gradient(760px 360px at 10% -5%, rgba(44, 197, 159, 0.12), transparent 55%),
-        var(--bg);
-      line-height: 1.6;
-    }
-
-    .container {
-      width: min(1080px, 92vw);
-      margin: 0 auto;
-      padding: 28px 0 64px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0 22px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .brand-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(120deg, var(--primary), var(--success));
-      box-shadow: 0 0 20px rgba(79, 124, 255, 0.7);
-    }
-
-    .badge {
-      border: 1px solid var(--line);
-      background: rgba(17, 28, 53, 0.75);
-      color: #c8d5ff;
-      padding: 7px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.35fr 1fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .panel {
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-main {
-      padding: 28px;
-    }
-
-    h1 {
-      font-size: clamp(32px, 5vw, 54px);
-      line-height: 1.05;
-      margin: 12px 0 14px;
-      letter-spacing: -0.02em;
-    }
-
-    .lead {
-      margin: 0;
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 780px;
-    }
-
-    .cta {
-      margin-top: 24px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      text-decoration: none;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-weight: 700;
-      border: 1px solid var(--line);
-      transition: transform 0.18s ease, opacity 0.18s ease;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .btn-primary {
-      color: #fff;
-      border: none;
-      background: linear-gradient(120deg, var(--primary), var(--primary-2));
-    }
-
-    .btn-secondary {
-      color: #d6e2ff;
-      background: rgba(8, 13, 26, 0.5);
-    }
-
-    .hero-side {
-      padding: 22px;
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .stat {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px;
-      background: rgba(9, 16, 33, 0.45);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 22px;
-      line-height: 1.15;
-    }
-
-    .section {
-      margin-top: 18px;
-      padding: 22px;
-    }
-
-    h2 {
-      margin: 0 0 14px;
-      font-size: 24px;
-      letter-spacing: -0.01em;
-    }
-
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 14px;
-      background: rgba(8, 14, 28, 0.42);
-    }
-
-    .card h3 {
-      margin: 0 0 6px;
-      font-size: 17px;
-    }
-
-    .muted { color: var(--muted); }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-      color: #d6e0ff;
-    }
-
-    li { margin: 8px 0; }
-
-    .footer {
-      margin-top: 20px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-    }
-
-    @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-main, .hero-side, .section { padding: 18px; }
-      .container { padding-top: 18px; }
-    }
-  </style>
+<html class="scroll-smooth" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RFP Copilot - Ausschreibungen in der halben Zeit gewinnen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#1d4fd7",
+                "background-light": "#f6f6f8",
+                "background-dark": "#111521",
+                },
+                fontFamily: {
+                "display": ["Inter", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+            },
+        }
+    </script>
 </head>
-<body>
-  <main class="container">
-    <div class="topbar">
-      <div class="brand"><span class="brand-dot"></span>RFP Copilot</div>
-      <span class="badge">5 Pilotplätze · 499–1.499 €/Monat</span>
-    </div>
-
-    <section class="hero">
-      <article class="panel hero-main">
-        <h1>Gewinnen Sie mehr Ausschreibungen – mit weniger Aufwand im Angebotsteam.</h1>
-        <p class="lead">RFP Copilot unterstützt DACH-Mittelständler dabei, Ausschreibungen schneller, konsistenter und mit höherer Qualität zu beantworten – ohne den bestehenden Prozess neu aufzubauen.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="mailto:pilot@rfp-copilot.example?subject=Pilotplatz%20RFP%20Copilot">Pilotplatz anfragen</a>
-          <a class="btn btn-secondary" href="#faq">FAQ ansehen</a>
-        </div>
-      </article>
-      <aside class="panel hero-side">
-        <div class="stat"><strong>-30% bis -50%</strong><span class="muted">Bearbeitungszeit pro RFP</span></div>
-        <div class="stat"><strong>Höhere Konsistenz</strong><span class="muted">über Teams, Antworten und Fristen</span></div>
-        <div class="stat"><strong>Schnelleres Onboarding</strong><span class="muted">weniger Wissen in Einzelköpfen</span></div>
-      </aside>
-    </section>
-
-    <section class="panel section">
-      <h2>Die häufigsten Probleme heute</h2>
-      <div class="grid cols-2">
-        <div class="card">
-          <ul>
-            <li>Zu viel manuelle Copy-Paste-Arbeit unter Deadline-Druck</li>
-            <li>Wissen ist auf Dateien, Personen und alte Angebote verteilt</li>
-            <li>Inkonsistente Antworten zwischen Teams und Einreichungen</li>
-          </ul>
-        </div>
-        <div class="card">
-          <ul>
-            <li>Jede neue Ausschreibung startet gefühlt wieder bei null</li>
-            <li>Hoher Abstimmungsaufwand zwischen Vertrieb und Fachbereichen</li>
-            <li>Wertvolle Antwortbausteine werden zu spät gefunden</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel section">
-      <h2>So funktioniert’s in 3 Schritten</h2>
-      <div class="grid cols-3">
-        <article class="card">
-          <h3>1) Ausschreibung hochladen</h3>
-          <p class="muted">Analyse von Anforderungen, Fristen und Muss-Kriterien.</p>
-        </article>
-        <article class="card">
-          <h3>2) Antworten vorstrukturieren</h3>
-          <p class="muted">Entwürfe aus vorhandenen Inhalten und Bibliotheken erzeugen.</p>
-        </article>
-        <article class="card">
-          <h3>3) Review & Finalisierung</h3>
-          <p class="muted">Team-Freigabe, Feinschliff und sauberer Export zur Abgabe.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="faq" class="panel section">
-      <h2>FAQ</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Für wen ist RFP Copilot geeignet?</h3>
-          <p class="muted">Für mittelständische Unternehmen mit regelmäßigem Ausschreibungsvolumen.</p>
-        </article>
-        <article class="card">
-          <h3>Wie schnell sind wir startklar?</h3>
-          <p class="muted">Typisch innerhalb weniger Tage für einen ersten produktiven Pilot-Use-Case.</p>
-        </article>
-        <article class="card">
-          <h3>Müssen wir Prozesse komplett umbauen?</h3>
-          <p class="muted">Nein. Der Copilot ergänzt den bestehenden Workflow und reduziert manuelle Arbeit.</p>
-        </article>
-      </div>
-    </section>
-
-    <p class="footer">RFP Copilot · Pilotprogramm DACH · Stand 2026</p>
-  </main>
-</body>
-</html>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 antialiased selection:bg-primary/20 selection:text-primary">
+<!-- Sticky Nav -->
+<nav class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-20">
+<div class="flex-shrink-0 flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">R</div>
+<span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">RFP Copilot</span>
+</div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#product">Produkt</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#how-it-works">So funktioniert’s</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#pricing">Preise</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors" href="#faq">FAQ</a>
+</div>
+<div class="hidden md:flex">
+<a class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all" href="#pricing">
+                        Pilotgespräch buchen
+                    </a>
+</div>
+<div class="md:hidden flex items-center">
+<button class="text-slate-500 hover:text-primary" type="button">
+<span class="material-icons-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative pt-20 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+<div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background-light to-background-light dark:from-primary/20 dark:via-background-dark dark:to-background-dark"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wide mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Neu für DACH
+            </div>
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-6">
+                Ausschreibungen in der <br class="hidden sm:block"/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">halben Zeit gewinnen</span>
+</h1>
+<p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+                Die KI-gestützte Lösung für Sales-Teams im Mittelstand – präzise, DSGVO-konform und sofort einsatzbereit. Befreien Sie Ihr Team von manueller Arbeit.
+            </p>
+<div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+<a class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold rounded-lg text-white bg-primary hover:bg-primary/90 shadow-lg shadow-primary/30 transition-all hover:-translate-y-0.5" href="#pricing">
+                    Pilotgespräch buchen
+                </a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold rounded-lg text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 hover:text-primary dark:bg-slate-800 dark:text-white dark:border-slate-700 dark:hover:bg-slate-700 transition-all" href="#product">
+<span class="material-icons-outlined mr-2">play_circle</span>
+                    Demo ansehen
+                </a>
+</div>
+<!-- Trust Row -->
+<div class="mt-12 pt-8 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap justify-center gap-6 sm:gap-12 text-slate-500 dark:text-slate-400 text-sm font-medium">
+<div class="flex items-center gap-2">
+<span class="material-icons-outlined text-primary">verified_user</span>
+<span>Für DACH-Mittelstand</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons-outlined text-primary">lock</span>
+<span>DSGVO-ready</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-icons-outlined text-primary">bolt</span>
+<span>Schneller Start</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Preview (Dashboard) -->
+<section class="relative -mt-12 lg:-mt-20 z-10 px-4 mb-24">
+<div class="max-w-6xl mx-auto">
+<div class="relative rounded-xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+<!-- Mockup Header -->
+<div class="h-10 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 flex items-center px-4 gap-2">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-red-400"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+<div class="w-3 h-3 rounded-full bg-green-400"></div>
+</div>
+</div>
+<!-- Mockup Content -->
+<div class="relative bg-white dark:bg-slate-800">
+<img alt="Dashboard interface showing analytics graphs and project list" class="w-full h-auto opacity-90 block dark:hidden" data-alt="Clean software dashboard interface with graphs and lists" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYeLkFilPjxWVPpUY-7Cm4iG3LZVqE9d4LDrOgBYML-rLAaSKRZLoCThun06Zpe8Oyeuf9wg28wMu3Z1B3CEXL8cF-lkfS9_snURh5_-70_-DGGuqRI50dIg-D4EqBbIFO5hk5-YcpKRDyltRYAQCVWBYASTaO4HEw0VAzxz9d-2CttHOovqmm--LXdrLyIYxkGgv8hLwDUt9maCLg88yp3m5kmXNC_jGLSt-gQ589aEhTdFKyi0PpcILKRPBEAsWmPbWtUxNBr9w"/>
+<img alt="Dashboard interface showing analytics graphs and project list dark mode" class="w-full h-auto opacity-90 hidden dark:block grayscale-[50%] invert-[90%]" data-alt="Dark mode dashboard interface with neon accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlTX3wfjf4Aq4O57Xmy-NuRV9hB8Z-e6Nr8aoOznXQJzhY8KNKzf4MWclPuR5SedwnqIlGYQSugySyLWHrS5ghk3AGV4xQF_YIDRu3Vm9gBib1a9X_P7bYTCxgKj5btT6_wZxTTHVWJ1pGRAED0qxY9mLo3EUARLJUlj8CtQh7N4rsJ_46EBDC9sgE3QLMDHCZohUIZXotIb4jwRFVVcRwEsxsln6RoW5B42tctsYFaD7wbzZfi_2WAhO0nkCJrGJx8UTx3NFNew8"/>
+<!-- Overlay to make it look more like the specific tool described -->
+<div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-slate-800 pointer-events-none"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Problem Section -->
+<section class="py-20 bg-white dark:bg-background-dark" id="product">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="text-base text-primary font-semibold tracking-wide uppercase">Herausforderungen</h2>
+<p class="mt-2 text-3xl leading-8 font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                    Warum bisher so mühsam?
+                </p>
+<p class="mt-4 max-w-2xl text-xl text-slate-500 dark:text-slate-400 mx-auto">
+                    Manuelle RFP-Prozesse bremsen Vertriebsteams aus und kosten wertvolle Zeit.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Card 1 -->
+<div class="group p-6 bg-background-light dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 shadow-sm hover:shadow-lg transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-icons-outlined">content_paste_off</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Copy-paste Chaos</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Endloses Suchen und Kopieren aus alten Dokumenten führt zu Fehlern und Frust.</p>
+</div>
+<!-- Card 2 -->
+<div class="group p-6 bg-background-light dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 shadow-sm hover:shadow-lg transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-icons-outlined">psychology</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Verteiltes Wissen</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Expertenwissen steckt in Köpfen oder E-Mails und ist nicht zentral verfügbar.</p>
+</div>
+<!-- Card 3 -->
+<div class="group p-6 bg-background-light dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 shadow-sm hover:shadow-lg transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-icons-outlined">hourglass_empty</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Fristdruck</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Knappe Deadlines bedeuten oft Nachtschichten oder verpasste Chancen.</p>
+</div>
+<!-- Card 4 -->
+<div class="group p-6 bg-background-light dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 dark:hover:border-primary/50 shadow-sm hover:shadow-lg transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-icons-outlined">rule</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Inkonsistente Antworten</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Unterschiedliche Formulierungen schwächen das Vertrauen potenzieller Kunden.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Solution Section -->
+<section class="py-20 bg-background-light dark:bg-slate-900" id="how-it-works">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white">Der schnellste Weg zum perfekten Angebot</h2>
+</div>
+<div class="relative">
+<!-- Connecting Line (Desktop) -->
+<div class="hidden lg:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20"></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Step 1 -->
+<div class="relative flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full bg-white dark:bg-slate-800 border-4 border-primary/10 flex items-center justify-center shadow-lg z-10 mb-6">
+<span class="text-3xl font-bold text-primary">1</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">RFP hochladen</h3>
+<p class="text-slate-600 dark:text-slate-400">Laden Sie Ihre Ausschreibungsunterlagen (PDF, Word, Excel) einfach per Drag &amp; Drop hoch.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full bg-white dark:bg-slate-800 border-4 border-primary/10 flex items-center justify-center shadow-lg z-10 mb-6">
+<span class="text-3xl font-bold text-primary">2</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Anforderungen extrahieren</h3>
+<p class="text-slate-600 dark:text-slate-400">Unsere KI analysiert die Dokumente, versteht den Kontext und identifiziert alle Fragen automatisch.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full bg-white dark:bg-slate-800 border-4 border-primary/10 flex items-center justify-center shadow-lg z-10 mb-6">
+<span class="text-3xl font-bold text-primary">3</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Drafts generieren</h3>
+<p class="text-slate-600 dark:text-slate-400">Erhalten Sie präzise Antwortvorschläge basierend auf Ihrer Wissensdatenbank. Ein Klick zum Export.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- KPI Section -->
+<section class="py-20 bg-white dark:bg-background-dark border-y border-slate-100 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Metric 1 -->
+<div class="p-6 rounded-xl bg-background-light dark:bg-slate-800/50">
+<p class="text-4xl font-extrabold text-[#10B981] mb-2">50%</p>
+<p class="font-medium text-slate-900 dark:text-white">Zeitersparnis</p>
+<p class="text-sm text-slate-500 mt-1">pro Ausschreibung</p>
+</div>
+<!-- Metric 2 -->
+<div class="p-6 rounded-xl bg-background-light dark:bg-slate-800/50">
+<p class="text-4xl font-extrabold text-[#10B981] mb-2">100%</p>
+<p class="font-medium text-slate-900 dark:text-white">Konsistenz</p>
+<p class="text-sm text-slate-500 mt-1">in der Tonalität</p>
+</div>
+<!-- Metric 3 -->
+<div class="p-6 rounded-xl bg-background-light dark:bg-slate-800/50">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-icons-outlined text-[#10B981] text-4xl">rocket_launch</span>
+</div>
+<p class="font-medium text-slate-900 dark:text-white">Schnelles Onboarding</p>
+<p class="text-sm text-slate-500 mt-1">in wenigen Tagen startklar</p>
+</div>
+<!-- Metric 4 -->
+<div class="p-6 rounded-xl bg-background-light dark:bg-slate-800/50">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-icons-outlined text-[#10B981] text-4xl">group_off</span>
+</div>
+<p class="font-medium text-slate-900 dark:text-white">Weniger Abstimmung</p>
+<p class="text-sm text-slate-500 mt-1">Experten werden entlastet</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Proof Section -->
+<section class="py-20 bg-background-light dark:bg-slate-900">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Vertrauen im Mittelstand</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+<!-- Testimonial 1 -->
+<div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 relative">
+<span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">"</span>
+<p class="text-slate-700 dark:text-slate-300 italic mb-6 relative z-10">
+                        "Endlich können wir auf komplexe Ausschreibungen reagieren, ohne das gesamte technische Team tagelang zu blockieren. Die Qualität der ersten Entwürfe ist beeindruckend."
+                    </p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Portrait of a sales director" class="w-full h-full object-cover" data-alt="Professional man smiling in business attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzxn0luFBGlPCW4BLcv0ji5vFIfgTocr4ge4PUiMmApCfSKSI4oYkCYA5LhUaD68zYaSFxiICSWxlnMqkJspBwfFOVVWe27Efld1Sz2lzcPRqe99mlHK3IY2MhBjeeOgHKPjqJbinXEKDQtZu6zoJCrbtfBZOrkusajihRJQy0mBf8NPkfnsQxeZucMUqxzmPYpzqad5j9AJkg0zrphe6kmWSpU1gnDD2x0B-RTcpFdSWb2RNAdyT3d9Nm2vcuiWYieMD-TUzoC9g"/>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Michael Weber</p>
+<p class="text-sm text-slate-500">Vertriebsleiter, TechSolutions GmbH</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 relative">
+<span class="text-6xl text-primary/10 absolute top-4 left-4 font-serif">"</span>
+<p class="text-slate-700 dark:text-slate-300 italic mb-6 relative z-10">
+                        "RFP Copilot hat unseren Bid-Prozess revolutioniert. Was früher Wochen dauerte, erledigen wir jetzt in Tagen. Und das DSGVO-konform."
+                    </p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Portrait of a bid manager" class="w-full h-full object-cover" data-alt="Professional woman looking confident in office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo8SHTzwEA6LIemo0es2-4R_KT6yAsfct3M2bIaJYPKsVWU1s6s7AdOMHlw8FuuYeZimJr4GPGEhyBnzwo0Mk2R3oEUObkGE8H_yFJuho_aoi8oOvOFRZsCLSvey8iZVlWleEgwIyX58lvdx5NBWIOgnd4g7eD86XeoHXJTiL7lM137UQ_bDbPEjQxCtxwAL9ae9cXnBvWhm-BIeYuGQpkOhIYsw3K7bijZFirIu7b1NO5M025xIwa5XqrI5DXfBc1dN8F6sOI9-I"/>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Sabine Müller</p>
+<p class="text-sm text-slate-500">Bid Manager, Logistik Express AG</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing / CTA Section -->
+<section class="py-20 bg-white dark:bg-background-dark" id="pricing">
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-2xl p-8 md:p-12 border border-primary/20 text-center relative overflow-hidden">
+<!-- Decorative BG -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"></div>
+<div class="inline-block px-4 py-1.5 rounded-full bg-primary/20 text-primary font-bold text-sm mb-6">
+                    Exklusives Pilotprogramm
+                </div>
+<h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Starten Sie jetzt durch</h2>
+<p class="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-lg mx-auto">
+                    Sichern Sie sich Ihren Wettbewerbsvorteil. Wir begleiten Sie persönlich beim Onboarding.
+                </p>
+<div class="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-lg inline-block w-full max-w-sm mb-8">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-slate-500 dark:text-slate-400">Verfügbarkeit</span>
+<span class="text-sm font-bold text-red-500 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                            Nur 5 Plätze verfügbar
+                        </span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 mb-1">
+<div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
+</div>
+<p class="text-xs text-left text-slate-400">Hohe Nachfrage im aktuellen Quartal</p>
+</div>
+<div>
+<button class="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg shadow-xl shadow-primary/20 transition-all transform hover:scale-[1.02]">
+                        Jetzt Pilotgespräch buchen
+                    </button>
+<p class="mt-4 text-sm text-slate-500">Kostenloses Erstgespräch • Keine Bindung</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-20 bg-background-light dark:bg-slate-900" id="faq">
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Häufig gestellte Fragen</h2>
+<div class="space-y-4">
+<!-- Question 1 -->
+<details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 open:border-primary/50 open:ring-1 open:ring-primary/20">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-slate-900 dark:text-white">
+<span>Wie sicher sind meine Daten (DSGVO)?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-icons-outlined">expand_more</span>
+</span>
+</summary>
+<div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                        Datenschutz hat oberste Priorität. Unsere Server stehen in Frankfurt (Deutschland) und wir nutzen ausschließlich DSGVO-konforme LLM-Provider mit entsprechenden AV-Verträgen. Ihre Daten werden nicht zum Training öffentlicher Modelle verwendet.
+                    </div>
+</details>
+<!-- Question 2 -->
+<details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 open:border-primary/50 open:ring-1 open:ring-primary/20">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-slate-900 dark:text-white">
+<span>Mit welchen Dateiformaten funktioniert es?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-icons-outlined">expand_more</span>
+</span>
+</summary>
+<div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                        RFP Copilot unterstützt alle gängigen Formate wie PDF, Microsoft Word (.docx) und Excel (.xlsx). Auch eingescannte Dokumente können via OCR verarbeitet werden.
+                    </div>
+</details>
+<!-- Question 3 -->
+<details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 open:border-primary/50 open:ring-1 open:ring-primary/20">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-slate-900 dark:text-white">
+<span>Wie lange dauert die Einrichtung?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-icons-outlined">expand_more</span>
+</span>
+</summary>
+<div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                        Das Onboarding ist sehr schnell. Nach dem Upload Ihrer bisherigen erfolgreichen Ausschreibungen und Produktunterlagen ist das System in der Regel innerhalb von 24-48 Stunden einsatzbereit.
+                    </div>
+</details>
+<!-- Question 4 -->
+<details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 open:border-primary/50 open:ring-1 open:ring-primary/20">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-slate-900 dark:text-white">
+<span>Kann ich die KI-Antworten bearbeiten?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-icons-outlined">expand_more</span>
+</span>
+</summary>
+<div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                        Absolut. Der "Copilot" erstellt Entwürfe, aber Sie behalten die volle Kontrolle. Jeder Vorschlag kann in einem intuitiven Editor angepasst, erweitert oder abgelehnt werden.
+                    </div>
+</details>
+<!-- Question 5 -->
+<details class="group bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 open:border-primary/50 open:ring-1 open:ring-primary/20">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-slate-900 dark:text-white">
+<span>Gibt es eine Mindestvertragslaufzeit?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-icons-outlined">expand_more</span>
+</span>
+</summary>
+<div class="text-slate-600 dark:text-slate-400 p-6 pt-0 leading-relaxed">
+                        Für unser Pilotprogramm bieten wir flexible Laufzeiten an, um Ihnen den Einstieg so risikofrei wie möglich zu machen. Sprechen Sie uns im Pilotgespräch darauf an.
+                    </div>
+</details>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-6 h-6 rounded bg-primary flex items-center justify-center text-white text-xs font-bold">R</div>
+<span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white">RFP Copilot</span>
+</div>
+<p class="text-sm text-slate-500 leading-relaxed">
+                        Die intelligente Lösung für effiziente Ausschreibungsprozesse im deutschen Mittelstand.
+                    </p>
+</div>
+<div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-4">Produkt</h4>
+<ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">Features</a></li>
+<li><a class="hover:text-primary" href="#">Sicherheit</a></li>
+<li><a class="hover:text-primary" href="#">Integrationen</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-4">Unternehmen</h4>
+<ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">Über uns</a></li>
+<li><a class="hover:text-primary" href="#">Karriere</a></li>
+<li><a class="hover:text-primary" href="#">Kontakt</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-slate-900 dark:text-white mb-4">Rechtliches</h4>
+<ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+<li><a class="hover:text-primary" href="#">Datenschutz</a></li>
+<li><a class="hover:text-primary" href="#">Impressum</a></li>
+<li><a class="hover:text-primary" href="#">AGB</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-400">© 2023 RFP Copilot GmbH. Alle Rechte vorbehalten.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="sr-only">LinkedIn</span>
+<svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
